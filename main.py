@@ -31,6 +31,7 @@ def upload_form():
       model="claude-v1-100k",
       max_tokens_to_sample= tokens,
     )
+    
     output = resp.get('completion')
 
     print(f"API Response: {output}")  # Debug line
