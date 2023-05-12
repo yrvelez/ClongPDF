@@ -1,0 +1,48 @@
+<!-- upload.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload PDF</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <h1>ClaudePDF</h1>
+<div class="container mt-5">
+  <form id="uploadForm" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="file">Upload PDF:</label>
+      <input type="file" class="form-control" id="file" name="file">
+    </div>
+    <div class="form-group">
+      <label for="prompt">Prompt:</label>
+      <input type="text" class="form-control" id="prompt" name="prompt">
+    </div>
+        <div class="form-group">
+      <label for="tokens">Max Tokens:</label>
+      <input type="text" class="form-control" id="tokens" name="tokens">
+    </div>
+    <button type="submit" class="btn btn-primary" id="submitForm">Submit</button>
+  </form>
+  <div id="output" class="mt-5"></div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("#uploadForm").submit(function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    $.ajax({
+      url: '/',
+      type: 'POST',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function(response) {
+        $("#output").html("<h2>Output:</h2><p>" + response + "</p>");
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
